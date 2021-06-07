@@ -1,0 +1,61 @@
+[{
+    "id": 1,
+    "name": "Eoin Morgan",
+    "country": "Endland",
+    "salary": 5000,
+    "img":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0p4vwOM80Lc-aSeo609pIQALq0P2izadghA&usqp=CAU"
+  }, {
+    "id": 2,
+    "name": "Andre Russel",
+    "country": "West Indies",
+    "salary": 4000,
+    "img":"https://static.iplt20.com/players/210/177.png"
+  }, {
+    "id": 3,
+    "name": "Dinesh Karthik",
+    "country": "India",
+    "salary": 3000,
+    "img":"https://static.iplt20.com/players/210/102.png"
+  }, {
+    "id": 4,
+    "name": "Nitish Rana",
+    "country": "India",
+    "salary": 2000,
+    "img":"https://static.iplt20.com/players/210/2738.png"
+  }, {
+    "id": 5,
+    "name": "Pat Commins",
+    "country": "Australia",
+    "salary": 4000,
+    "img":"https://www.kkr.in/static-assets/images/players/2020/56964.png?v=1&w=200"
+  }, {
+    "id": 6,
+    "name": "Shubman Gill",
+    "country": "India",
+    "salary": 2000,
+    "img":"https://static.iplt20.com/players/210/3761.png"
+  }, {
+    "id": 7,
+    "name": "Sunil Narine",
+    "country": "West Indies",
+    "salary": 3000,
+    "img":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZmNEI6JYRGFnsOqw8JZrapceprDa0tUMfgg&usqp=CAU"
+  }, {
+    "id": 8,
+    "name": "Shakib Al Hasan",
+    "country": "Bangladesh",
+    "salary": 5000,
+    "img":"https://pbs.twimg.com/media/ArGjE_3CIAM2deH.jpg"
+  }, {
+    "id": 9,
+    "name": "Kuldeep Yadav",
+    "country": "India",
+    "salary": 3000,
+    "img":"https://static.iplt20.com/players/210/261.png"
+  }, {
+    "id": 10,
+    "name": "Rahul Tripathi",
+    "country": "India",
+    "salary": 2000,
+    "img":"https://www.kkr.in/static-assets/images/players/2020/41229.png?v=1&w=200"
+  }]
