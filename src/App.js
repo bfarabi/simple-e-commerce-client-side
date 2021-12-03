@@ -1,37 +1,46 @@
-import logo from "./logo.svg";
 import "./App.css";
-
-import { useState } from "react";
-
-import Footer from "./Components/Footer/Footer";
-import Sidebar from "./Components/Sidebar/Sidebar";
+import React, { createContext, useState }  from "react";
 import Header from "./Components/Header/Header";
-import Players from "./Components/Players/Players";
+import Shop from "./Components/Shop/Shop";
+import {
 
+  BrowserRouter,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+import Review from './Components/Review/Review';
+import Inventory from './Components/Inventory/Inventory';
+import NotFound from './Components/NotFound/NotFound';
+import ProductDetail from './Components/ProductDetail/ProductDetail';
+import Login from "./Components/Login/Login";
+import Shipment from './Components/Shipment/Shipment';
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
+
+export const userContext = createContext();
 function App() {
-  const [cart, setCart] = useState([]);
-
-  const addClickPlayer = (player) => {
-    const newCart = [...cart, player];
-    setCart(newCart);
-  };
-
-  return (
-    <>
-      <Header></Header>
-      <main className="container my-5">
-        <div className="row">
-          <div className="col-md-9">
-            <Players addClickPlayer={addClickPlayer}></Players>
-          </div>
-          <div className="col-md-3">
-            <Sidebar cart={cart}></Sidebar>
-          </div>
   
-        </div>
-      </main>
-      <Footer></Footer>
-    </>
+const [loggedInUser, setLoggedInUser] = useState({});
+  return (
+    <userContext.Provider value={[loggedInUser, setLoggedInUser]} >
+  
+    <BrowserRouter>
+    <Header></Header>
+      <Routes>
+      
+        <Route path="/" element={<Shop></Shop>} />
+        <Route path="/shop" element={<Shop></Shop>} />
+        <Route path="/review" element={<Review />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/shipment" element={<PrivateRoute><Shipment /></PrivateRoute>} />
+        <Route path="/inventory" element={<PrivateRoute> <Inventory /></PrivateRoute> } />
+        <Route path="/product/:productKey" element={<ProductDetail />} />
+        
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+      
+    </userContext.Provider>
   );
 }
 
