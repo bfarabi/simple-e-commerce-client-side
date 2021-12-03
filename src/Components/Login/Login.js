@@ -1,25 +1,23 @@
 import { initializeApp, getApps } from "firebase/app";
 import firebaseConfig from "./firebase.config";
 import { useContext, useState } from "react";
-import { userContext } from './../../App';
-import { useNavigate , useLocation} from "react-router-dom";
-import { handleSignIn, handleSignOut } from './LoginManager';
+import { userContext } from "./../../App";
+import { useNavigate, useLocation } from "react-router-dom";
+import { handleSignIn, handleSignOut } from "./LoginManager";
 
 import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    updateProfile,
-  } from "firebase/auth";
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 
-
-  if ( getApps().length === 0 ) {
-    initializeApp(firebaseConfig);
+if (getApps().length === 0) {
+  initializeApp(firebaseConfig);
 }
 function Login() {
   const auth = getAuth();
-  
-  
+
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
@@ -35,32 +33,27 @@ function Login() {
     error: "",
     success: false,
   });
-const googleSignIn = () => {
-    handleSignIn()
-    .then(res =>{
-      handleResponse(res, true)
-        // setUser(res);
-        // setLoggedInUser(res);
-        // navigate(location.state.from);
-  
-    } )
-};
-const googleSignOut = () => {
-    handleSignOut()
-    .then(res => {
-      handleResponse(res, false)
-        // setUser(res);
-        // setLoggedInUser(res);
-      })
-};
-  
-  
+  const googleSignIn = () => {
+    handleSignIn().then((res) => {
+      handleResponse(res, true);
+      // setUser(res);
+      // setLoggedInUser(res);
+      // navigate(location.state.from);
+    });
+  };
+  const googleSignOut = () => {
+    handleSignOut().then((res) => {
+      handleResponse(res, false);
+      // setUser(res);
+      // setLoggedInUser(res);
+    });
+  };
 
-const handleSubmit = (e) => {
-  if (newUser && user.email && user.password) {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, user.email, user.password)
-        .then(res => {
+  const handleSubmit = (e) => {
+    if (newUser && user.email && user.password) {
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, user.email, user.password)
+        .then((res) => {
           const newUserInfo = { ...user };
           newUserInfo.error = "";
           newUserInfo.success = true;
@@ -68,29 +61,25 @@ const handleSubmit = (e) => {
           setLoggedInUser(newUserInfo);
           updateUserName(user.name);
           navigate(location.state.from);
-          
         })
         .catch((error) => {
-          const newUserInfo = {...user};
+          const newUserInfo = { ...user };
           newUserInfo.error = "Email already used";
           newUserInfo.success = false;
           setUser(newUserInfo);
           setLoggedInUser(newUserInfo);
-          
         });
-  };
+    }
 
     // .then(res =>{
-      // handleResponse(res, true)
-      // setUser(res);
-      // setLoggedInUser(res);
-      // navigate(location.state.from);
+    // handleResponse(res, true)
+    // setUser(res);
+    // setLoggedInUser(res);
+    // navigate(location.state.from);
 
-  // } )
+    // } )
 
-    
     if (!newUser && user.email && user.password) {
-      
       signInWithEmailAndPassword(auth, user.email, user.password)
         .then((res) => {
           const newUserInfo = { ...user };
@@ -109,24 +98,22 @@ const handleSubmit = (e) => {
         });
     }
     // .then(res =>{
-      // handleResponse(res, true)
-      // setUser(res);
-      // setLoggedInUser(res);
-      // navigate(location.state.from);
+    // handleResponse(res, true)
+    // setUser(res);
+    // setLoggedInUser(res);
+    // navigate(location.state.from);
 
-  // } )
-  
-  
+    // } )
+
     e.preventDefault();
-  
- };
+  };
   const handleResponse = (res, redirect) => {
-      setUser(res);
-      setLoggedInUser(res);
-      if(redirect) {
-        navigate(location.state.from);
-      }
+    setUser(res);
+    setLoggedInUser(res);
+    if (redirect) {
+      navigate(location.state.from);
     }
+  };
   const handleChange = (e) => {
     let isFormValid = true;
     if (e.target.name === "email") {
@@ -158,8 +145,7 @@ const handleSubmit = (e) => {
   };
 
   return (
-
-    <div style={{textAlign:'center'}} >
+    <div style={{ textAlign: "center" }}>
       {user.isSignedIn ? (
         <button onClick={googleSignOut}>Sign out</button>
       ) : (
@@ -226,8 +212,6 @@ const handleSubmit = (e) => {
       {user.error && <p style={{ color: "red" }}>{user.error}</p>}
     </div>
   );
-  
-};
-
+}
 
 export default Login;
