@@ -8,6 +8,7 @@ import {
   addToDatabaseCart,
   getDatabaseCart,
 } from "../../utilities/databaseManager";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Shop = () => {
   const first10 = fakeData.slice(0, 10);
@@ -48,7 +49,10 @@ const Shop = () => {
   return (
     <div className="twin-container">
       <div className="product-container">
-        {products.map((pd) => (
+    {
+      products.length === 0 && <CircularProgress color="success" />
+    }
+        { products.map((pd) => (
           <Product
             key={pd.key}
             showAddToCart={true}
