@@ -1,5 +1,5 @@
 {
-  "name": "kkr-app",
+  "name": "ema-john",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,8 +15,10 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hook-form": "^7.20.5",
+    "react-rating": "^2.0.5",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
+    "react-tinder-card": "^1.4.5",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

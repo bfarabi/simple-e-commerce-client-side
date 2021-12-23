@@ -7,14 +7,16 @@ import {
 } from "../../utilities/databaseManager";
 import Cart from "../Cart/Cart";
 import ReviewItems from "../ReviewItems/ReviewItems";
-import fakeData from "./../../fakeData/index";
 import happyImage from "../../images/giphy.gif";
 import { useNavigate } from "react-router";
+import loadingGif from "../../images/loadingGig.gif";
+import "./Review.css";
 
 const Review = () => {
   let navigate = useNavigate();
   const [cart, setCart] = useState([]);
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleProceedCheckout = () => {
     navigate("/shipment");
@@ -29,12 +31,24 @@ const Review = () => {
     //cart
     const savedCart = getDatabaseCart();
     const productKeys = Object.keys(savedCart);
-    const cartProduct = productKeys.map((key) => {
-      const product = fakeData.find((pd) => pd.key === key);
-      product.quantity = savedCart[key];
-      return product;
-    });
-    setCart(cartProduct);
+
+    fetch("https://secure-garden-38117.herokuapp.com/productsByKeys", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(productKeys),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCart(data);
+        setLoading(false);
+      });
+
+    // const cartProduct = productKeys.map((key) => {
+    //   const product = fakeData.find((pd) => pd.key === key);
+    //   product.quantity = savedCart[key];
+    //   return product;
+    // });
+    // setCart(cartProduct);
     // console.log(savedCart[key]);
   }, []);
   let thankYou;
@@ -44,7 +58,8 @@ const Review = () => {
   return (
     <div className="twin-container">
       <div className="product-container">
-        {cart.map((pd) => (
+      {loading? <img className='loadingGif' src={loadingGif} alt="" />:
+        cart.map((pd) => (
           <ReviewItems removeProduct={removeProduct} product={pd}></ReviewItems>
         ))}
         {thankYou}

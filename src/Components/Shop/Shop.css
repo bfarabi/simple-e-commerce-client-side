@@ -9,3 +9,10 @@
     margin-left: 20px;
     border-right: 1px solid grey;
 }
+.loadingGif {
+    width: 70%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

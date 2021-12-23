@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import "./Shipment.css";
 import { useContext } from "react";
 import { userContext } from "./../../App";
+import { getDatabaseCart, processOrder } from "../../utilities/databaseManager";
 
 const Shipment = () => {
   const [loggedInUser, setLoggedInUser] = useContext(userContext);
@@ -12,9 +13,25 @@ const Shipment = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const savedCart = getDatabaseCart();
+   const orderDetails = {...loggedInUser, products: savedCart, shipment: data, orderTime: new Date() }
+   
+   fetch('https://secure-garden-38117.herokuapp.com/addOrder',{
+    method:'POST',
+    headers:{'Content-Type' : 'application/json'},
+    body: JSON.stringify(orderDetails)
+})
+.then(res => res.json())
+.then(data => {
+  console.log(data);
+  if(data == data){
+    processOrder();
+    alert('orderer placed successfully')
+  }
+})
 
-  console.log(watch("example"));
+  };
 
   return (
     <form className="ship-form" onSubmit={handleSubmit(onSubmit)}>
